@@ -1,0 +1,8 @@
+﻿{
+    "name": "LostPolygon.Unity.SimpleSoundSystem",
+    "references": [
+        "LeanPool",
+        "DOTween.Modules",
+        "LostPolygon.Unity.Utility"
+    ]
+}

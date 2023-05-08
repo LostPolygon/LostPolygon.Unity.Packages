@@ -1,0 +1,20 @@
+{
+  "name": "com.lostpolygon.restapiclient",
+  "version": "1.0.0",
+  "displayName": "Lost Polygon's Rest API Client for HTTP Client",
+  "description": "",
+  "license": "MIT",
+  "unity": "2021.3",
+  "dependencies": {
+    "com.johanhelsing.oneof": "0.1.1",
+    "com.cysharp.unitask": "2.3.3",
+    "com.lostpolygon.vendor.log4net": "2.0.0"
+  },
+  "keywords": [
+  ],
+  "author": {
+    "name": "Lost Polygon",
+    "email": "serhii.yolkin@gmail.com",
+    "url": "https://lostpolygon.com"
+  }
+}

@@ -1,0 +1,20 @@
+{
+    "name": "LostPolygon.Unity.BuildMetadata.Editor",
+    "rootNamespace": "",
+    "references":[
+        "LostPolygon.Unity.Utility",
+        "LostPolygon.Unity.Utility.Editor",
+        "LostPolygon.Unity.BuildMetadata"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

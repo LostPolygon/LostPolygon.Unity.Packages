@@ -1,0 +1,45 @@
+{
+    "name": "LostPolygon.Unity.Utility.Editor",
+    "rootNamespace": "",
+    "references": [
+        "LostPolygon.Unity.Utility",
+        "Unity.2D.Sprite.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.nuget.newtonsoft-json",
+            "expression": "3.0.0",
+            "define": "LP_NEWTONSOFT_JSON_ENABLED"
+        },
+        {
+            "name": "com.unity.modules.imgui",
+            "expression": "1.0.0",
+            "define": "LP_UNITY_MODULE_IMGUI_ENABLED"
+        },
+        {
+            "name": "com.unity.modules.ui",
+            "expression": "1.0.0",
+            "define": "LP_UNITY_MODULE_UI_ENABLED"
+        },
+        {
+            "name": "com.unity.2d.sprite",
+            "expression": "1.0.0",
+            "define": "LP_UNITY_2D_SPRITE_ENABLED"
+        },
+        {
+            "name": "com.unity.2d.sprite",
+            "expression": "1.0.0",
+            "define": "LP_UNITY_2D_SPRITE_ENABLED"
+        }
+    ],
+    "noEngineReferences": false
+}

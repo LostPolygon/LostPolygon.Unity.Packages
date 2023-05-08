@@ -1,0 +1,15 @@
+{
+    "name": "LostPolygon.Unity.Log4net",
+    "rootNamespace": "",
+    "references": ["LostPolygon.Log4netExtensions"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+    ],
+    "noEngineReferences": false
+}

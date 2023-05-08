@@ -1,0 +1,17 @@
+{
+    "name": "LostPolygon.Unity.GameLogging",
+    "rootNamespace": "",
+    "references": [
+        "LostPolygon.Log4netExtensions",
+        "LostPolygon.Unity.Log4net"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

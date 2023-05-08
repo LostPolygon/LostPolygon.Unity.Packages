@@ -1,0 +1,8 @@
+﻿{
+  "name": "LostPolygon.Unity.RestApiClient",
+    "references": [
+        "UniTask",
+        "OneOf",
+        "LostPolygon.Unity.HttpClient"
+    ]
+}

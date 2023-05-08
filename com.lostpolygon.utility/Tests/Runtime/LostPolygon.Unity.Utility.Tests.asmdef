@@ -1,0 +1,12 @@
+﻿{
+    "name": "LostPolygon.Unity.Utility.Tests",
+    "includePlatforms": [
+        "Editor"
+    ],
+    "references": [
+        "LostPolygon.Unity.Utility"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ]
+}

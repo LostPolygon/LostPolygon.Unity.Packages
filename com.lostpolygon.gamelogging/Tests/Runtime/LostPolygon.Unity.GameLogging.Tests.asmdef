@@ -1,0 +1,26 @@
+{
+    "name": "LostPolygon.Unity.GameLogging.Tests",
+    "rootNamespace": "",
+    "references": [
+        "LostPolygon.Log4netExtensions",
+        "LostPolygon.Unity.GameLogging",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "log4net.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

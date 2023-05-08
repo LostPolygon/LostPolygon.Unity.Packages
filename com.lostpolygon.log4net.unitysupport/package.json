@@ -1,0 +1,19 @@
+{
+  "name": "com.lostpolygon.log4net.unitysupport",
+  "version": "1.0.0",
+  "displayName": "Lost Polygon's Unity Support Utility for log4net",
+  "description": "",
+  "license": "MIT",
+  "unity": "2021.3",
+  "dependencies": {
+    "com.lostpolygon.vendor.log4net": "2.0.0",
+    "com.lostpolygon.log4net.extensions": "1.0.0"
+  },
+  "keywords": [
+  ],
+  "author": {
+    "name": "Lost Polygon",
+    "email": "serhii.yolkin@gmail.com",
+    "url": "https://lostpolygon.com"
+  }
+}
