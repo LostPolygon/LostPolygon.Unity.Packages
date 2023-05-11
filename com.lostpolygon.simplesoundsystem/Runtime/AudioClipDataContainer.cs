@@ -4,7 +4,6 @@ using LostPolygon.Unity.Utility;
 using UnityEngine;
 
 namespace LostPolygon.Unity.SimpleSoundSystem {
-    [CreateAssetMenu]
     [Serializable]
     public abstract class AudioClipDataContainer<TSoundType, TAudioMetaClipData> :
         ScriptableObject,
@@ -15,10 +14,10 @@ namespace LostPolygon.Unity.SimpleSoundSystem {
         private SoundTypeToAudioMetaClipDataDictionary _soundTypeToMetaClip;
 
         public IAudioMetaClipData GetByType(TSoundType type) {
-            if (_soundTypeToMetaClip.TryGetValue(type, out var metaClip))
+            if (_soundTypeToMetaClip.TryGetValue(type, out TAudioMetaClipData metaClip))
                 return metaClip;
 
-            throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            throw new KeyNotFoundException($"No clip data found for sound type {type}");
         }
 
         public IReadOnlyCollection<TSoundType> GetAllSoundTypes() {

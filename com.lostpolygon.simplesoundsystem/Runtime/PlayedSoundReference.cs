@@ -17,7 +17,7 @@ namespace LostPolygon.Unity.SimpleSoundSystem {
         }
 
         public void Stop() {
-            var despawnTween = _despawnTween;
+            Tween despawnTween = _despawnTween;
             if (despawnTween == null)
                 return;
 

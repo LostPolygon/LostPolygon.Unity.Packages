@@ -50,7 +50,9 @@ namespace LostPolygon.Unity.Utility {
             if (_instance != null)
                 return;
 
-            GameObject gameObject = new GameObject(typeof(T).Name);
+            GameObject gameObject = new GameObject(typeof(T).Name) {
+                hideFlags = HideFlags.DontSave
+            };
             _instance = gameObject.AddComponent<T>();
         }
 
