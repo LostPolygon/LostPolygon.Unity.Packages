@@ -2,10 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Text.Encodings.Web;
 using log4net.Core;
 using log4net.Layout;
 using log4net.Util;
+#if UNITY_2022_3_OR_NEWER
+using System.Text.Encodings.Web;
+#else
+using System.Net;
+#endif
 
 namespace LostPolygon.Log4netExtensions {
     public partial class HtmlLayout : LayoutSkeleton {
@@ -126,7 +130,7 @@ namespace LostPolygon.Log4netExtensions {
                     .Replace("{{START_DATE}}", DateTime.UtcNow.ToString(StartDateFormat, CultureInfo.InvariantCulture))
                     .Replace("{{FILTERED_CELL_INDEXES}}", String.Join(", ", _filteredCellIndexes))
                     .Replace("{{MAX_TEXT_LENGTH_BEFORE_COLLAPSE}}", MaxTextLengthBeforeCollapse.ToString())
-                    .Replace("{{COLLAPSED_TEXT_HEIGHT}}", CollapsedTextHeight.ToString())
+                    .Replace("{{COLLAPSED_TEXT_HEIGHT}}", CollapsedTextHeight)
                     .Replace("{{CUSTOM_CSS}}", CustomCss)
                     .Replace("{{JS_BEFORE_LOAD}}", CustomJavascriptBeforeLoad)
                     .Replace("{{JS_AFTER_LOAD}}", CustomJavascriptAfterLoad);
@@ -237,8 +241,10 @@ namespace LostPolygon.Log4netExtensions {
         }
 
         private class HtmlEscapingTextWriterAdapter : TextWriterAdapter {
+#if UNITY_2022_3_OR_NEWER
             [ThreadStatic]
             private static char[] CharArrayCache;
+#endif
 
             public HtmlEscapingTextWriterAdapter(TextWriter writer) : base(writer) {
             }
@@ -251,9 +257,13 @@ namespace LostPolygon.Log4netExtensions {
             /// </para>
             /// </remarks>
             public override void Write(char value) {
+#if UNITY_2022_3_OR_NEWER
                 CharArrayCache ??= new char[1];
                 CharArrayCache[0] = value;
                 HtmlEncoder.Default.Encode(Writer, CharArrayCache, 0, 1);
+#else
+                WebUtility.HtmlEncode(value.ToString(), Writer);
+#endif
             }
 
             /// <summary>Writes a character buffer to the wrapped TextWriter</summary>
@@ -266,7 +276,11 @@ namespace LostPolygon.Log4netExtensions {
             /// </para>
             /// </remarks>
             public override void Write(char[] buffer, int index, int count) {
+#if UNITY_2022_3_OR_NEWER
                 HtmlEncoder.Default.Encode(Writer, buffer, index, count);
+#else
+                WebUtility.HtmlEncode(new String(buffer, index, count), Writer);
+#endif
             }
 
             /// <summary>Writes a string to the wrapped TextWriter</summary>
@@ -277,7 +291,11 @@ namespace LostPolygon.Log4netExtensions {
             /// </para>
             /// </remarks>
             public override void Write(string value) {
+#if UNITY_2022_3_OR_NEWER
                 HtmlEncoder.Default.Encode(Writer, value);
+#else
+                WebUtility.HtmlEncode(value, Writer);
+#endif
             }
         }
     }
