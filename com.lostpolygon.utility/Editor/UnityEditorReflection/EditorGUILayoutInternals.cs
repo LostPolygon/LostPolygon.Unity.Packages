@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace LostPolygon.Unity.Utility.Editor {
     /// <summary>
-    /// Editor GUI drawing helpers.
+    /// Exposes non-public members of the <see cref="UnityEditor.EditorGUILayout"/> via reflection.
     /// </summary>
     public static class EditorGUILayoutInternals {
         private static readonly ReflectionWrapper Wrapped =

@@ -22,8 +22,7 @@ namespace LostPolygon.Unity.Utility.Editor {
 
         public static bool DoesTextureHaveAlpha(this TextureImporter textureImporter) =>
             textureImporter.DoesSourceTextureHaveAlpha() ||
-            textureImporter.alphaSource != TextureImporterAlphaSource.None ||
-            textureImporter.alphaIsTransparency;
+            textureImporter.alphaSource != TextureImporterAlphaSource.None;
 
         public static Vector2Int GetSourceTextureWidthAndHeight(this TextureImporter textureImporter) {
             textureImporter.GetSourceTextureWidthAndHeight(out int width, out int height);

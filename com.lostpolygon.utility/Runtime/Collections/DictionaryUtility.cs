@@ -22,7 +22,7 @@ namespace LostPolygon.Unity.Utility {
         }
     }
 
-    public struct DictionaryDiffResult<TKey, TValue> {
+    public readonly struct DictionaryDiffResult<TKey, TValue> {
         public readonly List<KeyValuePair<TKey, TValue>> Added;
         public readonly List<KeyValuePair<TKey, TValue>> Removed;
         public readonly List<KeyValuePair<TKey, TValue>> Unchanged;

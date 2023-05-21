@@ -6,7 +6,6 @@
   "license": "MIT",
   "unity": "2021.3",
   "dependencies": {
-    "games.corundum.isexternalinit": "1.0.0"
   },
   "keywords": [
   ],
