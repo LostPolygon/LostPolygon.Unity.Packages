@@ -6,7 +6,7 @@ namespace LostPolygon.Unity.Utility.Editor {
     /// Exposes non-public members of the <see cref="UnityEditor.EditorGUILayout"/> via reflection.
     /// </summary>
     public static class EditorGUILayoutInternals {
-        private static readonly ReflectionWrapper Wrapped =
+        private static ReflectionWrapper Wrapped { get; } =
             ReflectionWrapper.Wrap(typeof(EditorGUILayout));
 
         public static int BeginPlatformGrouping(GUIContent defaultTab) {

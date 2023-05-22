@@ -3,7 +3,7 @@ using UnityEditor.Build;
 
 namespace LostPolygon.Unity.Utility.Editor {
     public static class EditorUserBuildSettingsUtilsInternals {
-        private static readonly ReflectionWrapper EditorUserBuildSettingsUtils =
+        private static ReflectionWrapper EditorUserBuildSettingsUtils { get; } =
             ReflectionWrapper.Wrap(
                 typeof(EditorGUILayout).Assembly.GetType("UnityEditor.EditorUserBuildSettingsUtils")
             );
