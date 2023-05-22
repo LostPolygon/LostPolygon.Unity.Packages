@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LostPolygon.Unity.Utility.Editor {
     public static class SpriteExtensions {
-        public static bool IsTextureTightMesh(this Sprite sprite) {
+        public static bool IsTightSpriteMesh(this Sprite sprite) {
             return SpriteUtility.GetSpriteTexture(sprite, false).IsTightSpriteMesh();
         }
 

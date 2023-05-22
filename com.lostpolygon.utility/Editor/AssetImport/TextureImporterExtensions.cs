@@ -1,3 +1,5 @@
+#nullable enable
+
 using UnityEditor;
 using UnityEngine;
 #if LP_UNITY_2D_SPRITE_ENABLED
@@ -12,6 +14,8 @@ namespace LostPolygon.Unity.Utility.Editor {
 #if LP_UNITY_2D_SPRITE_ENABLED
         private static readonly SpriteDataProviderFactories SpriteDataProviderFactories;
 #endif
+
+        private static readonly TextureImporterSettings TextureImporterSettingsCache = new();
 
         static TextureImporterExtensions() {
 #if LP_UNITY_2D_SPRITE_ENABLED
@@ -40,6 +44,25 @@ namespace LostPolygon.Unity.Utility.Editor {
             return
                 textureImporter.textureType == TextureImporterType.Sprite &&
                 textureImporter.spriteImportMode != SpriteImportMode.Polygon;
+        }
+        
+        public static TextureImporterSettings? GetTextureImporterSettings(this TextureImporter? textureImporter) {
+            if (textureImporter == null)
+                return null;
+
+            textureImporter.ReadTextureSettings(TextureImporterSettingsCache);
+            return TextureImporterSettingsCache;
+        }
+        
+        public static bool IsTightSpriteMesh(this TextureImporter? textureImporter) {
+            return textureImporter.GetTextureImporterSettings().IsTightSpriteMesh();
+        }
+        
+        public static bool IsTightSpriteMesh(this TextureImporterSettings? settings) {
+            if (settings == null)
+                return false;
+
+            return settings.spriteMeshType == SpriteMeshType.Tight;
         }
 
 #if LP_UNITY_2D_SPRITE_ENABLED

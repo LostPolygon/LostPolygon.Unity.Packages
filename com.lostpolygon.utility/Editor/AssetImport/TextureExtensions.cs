@@ -15,19 +15,10 @@ namespace LostPolygon.Unity.Utility.Editor {
 
             return textureImporter;
         }
-        
+
         public static TextureImporterSettings? GetTextureImporterSettings(this Texture2D texture) {
             TextureImporter? textureImporter = GetTextureImporter(texture);
-            return GetTextureImporterSettings(textureImporter);
-        }
-
-        public static TextureImporterSettings? GetTextureImporterSettings(this TextureImporter? textureImporter) {
-            if (textureImporter == null)
-                return null;
-
-            TextureImporterSettings textureImporterSettings = new();
-            textureImporter.ReadTextureSettings(textureImporterSettings);
-            return textureImporterSettings;
+            return textureImporter.GetTextureImporterSettings();
         }
 
         public static bool IsTightSpriteMesh(this Texture2D texture) {
