@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LostPolygon.Unity.Utility {
     public static class CollectionExtensions {
-        public static IEnumerable<T> ForEach<T>(this IReadOnlyList<T> source, Action<T> action) {
+        public static IReadOnlyList<T> ForEach<T>(this IReadOnlyList<T> source, Action<T> action) {
             for (int i = 0; i < source.Count; i++) {
                 action(source[i]);
             }
@@ -21,7 +21,7 @@ namespace LostPolygon.Unity.Utility {
             if (list.Count - index < count)
                 throw new ArgumentException("Invalid offset for given length");
 
-            List<T> rangeList = new List<T>(count);
+            List<T> rangeList = new(count);
             for (int i = 0; i < count; i++) {
                 rangeList.Add(list[index + i]);
             }

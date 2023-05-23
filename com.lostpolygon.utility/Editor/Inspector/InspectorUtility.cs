@@ -27,7 +27,7 @@ namespace LostPolygon.Unity.Utility.Editor {
         /// </returns>
         /// <typeparam name="TField">The data container type.</typeparam>
         public static bool IsMixedValues<TField>(
-            IEnumerable<TContainer> dataContainers,
+            IReadOnlyList<TContainer> dataContainers,
             Func<TContainer, TField> valueGetterFunc,
             out TField value
         ) {
@@ -35,7 +35,8 @@ namespace LostPolygon.Unity.Utility.Editor {
             bool isValueSet = false;
             bool isValueMixed = false;
 
-            foreach (TContainer dataContainer in dataContainers) {
+            for (int i = 0; i < dataContainers.Count; i++) {
+                TContainer dataContainer = dataContainers[i];
                 if (isValueSet && !EqualityComparer<TField>.Default.Equals(value, valueGetterFunc(dataContainer))) {
                     isValueMixed = true;
                 }
@@ -67,7 +68,7 @@ namespace LostPolygon.Unity.Utility.Editor {
         /// </returns>
         /// <typeparam name="TField">The data container type.</typeparam>
         public static bool DrawField<TField>(
-            TContainer[] dataContainers,
+            IReadOnlyList<TContainer> dataContainers,
             Func<TContainer, TField> valueGetterFunc,
             Action<int, TContainer, TField> valueSetterAction,
             Func<TField, TField> drawerFunc
@@ -98,7 +99,7 @@ namespace LostPolygon.Unity.Utility.Editor {
         /// </returns>
         /// <typeparam name="TField">The data container type.</typeparam>
         public static bool DrawField<TField>(
-            TContainer[] dataContainers,
+            IReadOnlyList<TContainer> dataContainers,
             Func<TContainer, TField> valueGetterFunc,
             Action<int, TContainer, TField> valueSetterAction,
             Func<TField, TField> drawerFunc,
@@ -119,7 +120,7 @@ namespace LostPolygon.Unity.Utility.Editor {
             }
 
             if (isChanged) {
-                for (int i = 0; i < dataContainers.Length; i++) {
+                for (int i = 0; i < dataContainers.Count; i++) {
                     TContainer settings = dataContainers[i];
                     valueSetterAction(i, settings, newValue);
                 }
