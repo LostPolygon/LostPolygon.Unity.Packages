@@ -3,8 +3,8 @@ using Unity.Collections;
 
 namespace LostPolygon.Unity.Utility {
     public struct NativeArrayWithLength<T> : IDisposable where T : struct {
-        public NativeArray<T> Array { get; }
-        public NativeArray<int> Length { get; }
+        public NativeArray<T> Array;
+        public NativeArray<int> Length;
 
         public NativeArrayWithLength(NativeArray<T> array, int length, Allocator lengthAllocator) {
             Array = array;

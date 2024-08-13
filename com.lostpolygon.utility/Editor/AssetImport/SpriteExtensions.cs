@@ -4,10 +4,8 @@ using UnityEngine;
 
 namespace LostPolygon.Unity.Utility.Editor {
     public static class SpriteExtensions {
-        public static bool IsTextureTightMesh(this Sprite sprite) {
-            return
-                sprite.packingMode == SpritePackingMode.Tight ||
-                SpriteUtility.GetSpriteTexture(sprite, false).IsTightSpriteMesh();
+        public static bool IsTightSpriteMesh(this Sprite sprite) {
+            return SpriteUtility.GetSpriteTexture(sprite, false).IsTightSpriteMesh();
         }
 
         public static bool IsSpriteTextureInSpriteImportMode(this Sprite sprite) {

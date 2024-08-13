@@ -15,10 +15,10 @@ namespace LostPolygon.Unity.Utility {
     public static class GUIScaler {
         // 160 is the 100% scale Windows DPI.
         public const float BASE_SCALE = 96f;
-        static bool initialized = false;
-        static bool scaling = false;
-        static Vector3 guiScale = Vector3.one;
-        static Matrix4x4 restoreMatrix = Matrix4x4.identity;
+        private static bool initialized = false;
+        private static bool scaling = false;
+        private static Vector3 guiScale = Vector3.one;
+        private static Matrix4x4 restoreMatrix = Matrix4x4.identity;
 
         public static float Scale => scaling ? guiScale.x : 1f;
 

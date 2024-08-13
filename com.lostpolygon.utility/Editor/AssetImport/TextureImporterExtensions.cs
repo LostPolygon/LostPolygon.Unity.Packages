@@ -1,3 +1,5 @@
+#nullable enable
+
 using UnityEditor;
 using UnityEngine;
 #if LP_UNITY_2D_SPRITE_ENABLED
@@ -13,6 +15,8 @@ namespace LostPolygon.Unity.Utility.Editor {
         private static readonly SpriteDataProviderFactories SpriteDataProviderFactories;
 #endif
 
+        private static readonly TextureImporterSettings TextureImporterSettingsCache = new();
+
         static TextureImporterExtensions() {
 #if LP_UNITY_2D_SPRITE_ENABLED
             SpriteDataProviderFactories = new SpriteDataProviderFactories();
@@ -22,8 +26,7 @@ namespace LostPolygon.Unity.Utility.Editor {
 
         public static bool DoesTextureHaveAlpha(this TextureImporter textureImporter) =>
             textureImporter.DoesSourceTextureHaveAlpha() ||
-            textureImporter.alphaSource != TextureImporterAlphaSource.None ||
-            textureImporter.alphaIsTransparency;
+            textureImporter.alphaSource != TextureImporterAlphaSource.None;
 
         public static Vector2Int GetSourceTextureWidthAndHeight(this TextureImporter textureImporter) {
             textureImporter.GetSourceTextureWidthAndHeight(out int width, out int height);
@@ -41,6 +44,25 @@ namespace LostPolygon.Unity.Utility.Editor {
             return
                 textureImporter.textureType == TextureImporterType.Sprite &&
                 textureImporter.spriteImportMode != SpriteImportMode.Polygon;
+        }
+        
+        public static TextureImporterSettings? GetTextureImporterSettings(this TextureImporter? textureImporter) {
+            if (textureImporter == null)
+                return null;
+
+            textureImporter.ReadTextureSettings(TextureImporterSettingsCache);
+            return TextureImporterSettingsCache;
+        }
+        
+        public static bool IsTightSpriteMesh(this TextureImporter? textureImporter) {
+            return textureImporter.GetTextureImporterSettings().IsTightSpriteMesh();
+        }
+        
+        public static bool IsTightSpriteMesh(this TextureImporterSettings? settings) {
+            if (settings == null)
+                return false;
+
+            return settings.spriteMeshType == SpriteMeshType.Tight;
         }
 
 #if LP_UNITY_2D_SPRITE_ENABLED

@@ -1,3 +1,7 @@
+#if UNITY_2022_3_OR_NEWER && false // disable for now
+#define ENABLE_HTML_ENCODER
+#endif
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -5,12 +9,7 @@ using System.IO;
 using log4net.Core;
 using log4net.Layout;
 using log4net.Util;
-
-#if false
-#define ALLOW_HTML_ENCODER
-#endif
-
-#if ALLOW_HTML_ENCODER
+#if ENABLE_HTML_ENCODER
 using System.Text.Encodings.Web;
 #else
 using System.Net;
@@ -246,7 +245,7 @@ namespace LostPolygon.Log4netExtensions {
         }
 
         private class HtmlEscapingTextWriterAdapter : TextWriterAdapter {
-#if ALLOW_HTML_ENCODER
+#if ENABLE_HTML_ENCODER
             [ThreadStatic]
             private static char[] CharArrayCache;
 #endif
@@ -262,7 +261,7 @@ namespace LostPolygon.Log4netExtensions {
             /// </para>
             /// </remarks>
             public override void Write(char value) {
-#if ALLOW_HTML_ENCODER
+#if ENABLE_HTML_ENCODER
                 CharArrayCache ??= new char[1];
                 CharArrayCache[0] = value;
                 HtmlEncoder.Default.Encode(Writer, CharArrayCache, 0, 1);
@@ -281,8 +280,7 @@ namespace LostPolygon.Log4netExtensions {
             /// </para>
             /// </remarks>
             public override void Write(char[] buffer, int index, int count) {
-#if ALLOW_HTML_ENCODER
-                System.Text.Encodings.Web
+#if ENABLE_HTML_ENCODER
                 HtmlEncoder.Default.Encode(Writer, buffer, index, count);
 #else
                 WebUtility.HtmlEncode(new String(buffer, index, count), Writer);
@@ -297,7 +295,7 @@ namespace LostPolygon.Log4netExtensions {
             /// </para>
             /// </remarks>
             public override void Write(string value) {
-#if ALLOW_HTML_ENCODER
+#if ENABLE_HTML_ENCODER
                 HtmlEncoder.Default.Encode(Writer, value);
 #else
                 WebUtility.HtmlEncode(value, Writer);

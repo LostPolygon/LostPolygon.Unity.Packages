@@ -7,7 +7,7 @@ namespace LostPolygon.Unity.Utility {
             return color;
         }
 
-        public static Color WithRgbColor(this Color color, Color rgbColor) {
+        public static Color WithRgbColor(this Color color, in Color rgbColor) {
             color.r = rgbColor.r;
             color.g = rgbColor.g;
             color.b = rgbColor.b;

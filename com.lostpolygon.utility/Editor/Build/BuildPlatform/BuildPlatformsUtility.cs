@@ -11,9 +11,10 @@ namespace LostPolygon.Unity.Utility.Editor {
     /// Utilities for working with build platforms.
     /// </summary>
     public static class BuildPlatformsUtility {
-        public static readonly BuildPlatform[] ValidBuildPlatforms;
-        public static readonly Dictionary<BuildPlatformId, BuildPlatform> BuildPlatformIdToBuildPlatformMap;
-        public static readonly Array ValidBuildPlatformsRaw;
+        public static BuildPlatform[] ValidBuildPlatforms { get; }
+        public static Dictionary<BuildPlatformId, BuildPlatform> BuildPlatformIdToBuildPlatformMap { get; }
+        
+        internal static readonly Array ValidBuildPlatformsRaw;
 
         static BuildPlatformsUtility() {
             Assembly editorAssembly = typeof(NamedBuildTarget).Assembly;

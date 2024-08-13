@@ -15,9 +15,8 @@ namespace LostPolygon.Unity.Utility {
         }
 
         /// <returns>true if dictionaries have equal contents, false otherwise</returns>
-        public static bool Compare<TKey, TValue>(this IDictionary<TKey, TValue> dict1, IDictionary<TKey, TValue> dict2) {
-            // ReSharper disable once PossibleUnintendedReferenceComparison
-            if (dict1 == dict2) return true;
+        public static bool Equal<TKey, TValue>(this IDictionary<TKey, TValue> dict1, IDictionary<TKey, TValue> dict2) {
+            if (ReferenceEquals(dict1, dict2)) return true;
             if (dict1 == null || dict2 == null) return false;
             if (dict1.Count != dict2.Count) return false;
 

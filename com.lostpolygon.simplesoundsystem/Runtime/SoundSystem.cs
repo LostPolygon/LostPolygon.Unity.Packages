@@ -25,17 +25,17 @@ namespace LostPolygon.Unity.SimpleSoundSystem {
         }
 
         public PlayedSoundReference PlaySound(TSoundType type, float delay = 0f) {
-            var metaClipData = _clipRepository.GetByType(type);
+            IAudioMetaClipData metaClipData = _clipRepository.GetByType(type);
             if (metaClipData.Clips.Length == 0)
                 return null;
 
-            var clipData = metaClipData.Clips[Random.Range(0, metaClipData.Clips.Length)];
+            AudioClipData clipData = metaClipData.Clips[Random.Range(0, metaClipData.Clips.Length)];
             if (clipData.AudioClip == null) {
                 Debug.LogWarning($"Audio definition has no clip {type}");
                 return null;
             }
 
-            var audioSourceGameObject = _audioSourcePool.Spawn(Vector3.zero, Quaternion.identity, _audioSourcePool.transform);
+            GameObject audioSourceGameObject = _audioSourcePool.Spawn(Vector3.zero, Quaternion.identity, _audioSourcePool.transform);
             if (audioSourceGameObject == null) {
                 Debug.LogWarning($"Audio source pool depleted, sound {type} not played");
                 return null;
@@ -45,13 +45,13 @@ namespace LostPolygon.Unity.SimpleSoundSystem {
             audioSourceGameObject.name = $"AudioSource [{type}]";
 #endif
 
-            var audioSource = audioSourceGameObject.GetComponent<AudioSource>();
+            AudioSource audioSource = audioSourceGameObject.GetComponent<AudioSource>();
             audioSource.clip = clipData.AudioClip;
 
-            var logarithmicVolume = Mathf.Pow(clipData.Volume, (float) Math.E);
+            float logarithmicVolume = Mathf.Pow(clipData.Volume, (float) Math.E);
             audioSource.volume = Mathf.Abs(clipData.FadeInDuration) > Vector3.kEpsilon ? 0 : logarithmicVolume;
 
-            var pitch = 1f;
+            float pitch = 1f;
             if (Mathf.Abs(clipData.PitchVariationDelta) > Vector3.kEpsilon) {
                 pitch += Random.Range(-clipData.PitchVariationDelta, clipData.PitchVariationDelta);
             }
@@ -65,15 +65,15 @@ namespace LostPolygon.Unity.SimpleSoundSystem {
                 audioSource.Play();
             }
 
-            var audioClipLength = clipData.AudioClip.length / Mathf.Abs(pitch);
+            float audioClipLength = clipData.AudioClip.length / Mathf.Abs(pitch);
             audioClipLength += delay;
 
             // FIXME: is it necessary?
             // to be extra sure LeanPool won't cut the sound short
             audioClipLength += 0.1f;
 
-            var playedSoundReference = LeanClassPool<PlayedSoundReference>.Spawn() ?? new PlayedSoundReference();
-            var despawnSequence =
+            PlayedSoundReference playedSoundReference = LeanClassPool<PlayedSoundReference>.Spawn() ?? new PlayedSoundReference();
+            Sequence despawnSequence =
                 DOTween.Sequence()
                     .Insert(
                         0,
@@ -108,8 +108,8 @@ namespace LostPolygon.Unity.SimpleSoundSystem {
         }
 
         public void StopAllSoundsOfType(TSoundType type) {
-            var playedSoundsOfType = GetPlayedSoundsByType(type);
-            foreach (var playedSoundReference in playedSoundsOfType.ToArray()) {
+            HashSet<PlayedSoundReference> playedSoundsOfType = GetPlayedSoundsByType(type);
+            foreach (PlayedSoundReference playedSoundReference in playedSoundsOfType.ToArray()) {
                 playedSoundReference.Stop();
             }
         }
@@ -137,7 +137,7 @@ namespace LostPolygon.Unity.SimpleSoundSystem {
         }
 
         private HashSet<PlayedSoundReference> GetPlayedSoundsByType(TSoundType type) {
-            if (_activeSounds.TryGetValue(type, out var activeSoundsOfType))
+            if (_activeSounds.TryGetValue(type, out HashSet<PlayedSoundReference> activeSoundsOfType))
                 return activeSoundsOfType;
 
             activeSoundsOfType = new HashSet<PlayedSoundReference>();

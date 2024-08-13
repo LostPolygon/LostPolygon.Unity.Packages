@@ -19,25 +19,25 @@ namespace LostPolygon.Unity.Utility {
         public UnitySerializedDictionary() {
         }
 
-        protected UnitySerializedDictionary(IDictionary<TKey, TValue> dictionary) : base(dictionary) {
+        public UnitySerializedDictionary(IDictionary<TKey, TValue> dictionary) : base(dictionary) {
         }
 
-        protected UnitySerializedDictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer) : base(dictionary, comparer) {
+        public UnitySerializedDictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer) : base(dictionary, comparer) {
         }
 
-        protected UnitySerializedDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection) : base(collection) {
+        public UnitySerializedDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection) : base(collection) {
         }
 
-        protected UnitySerializedDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey> comparer) : base(collection, comparer) {
+        public UnitySerializedDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey> comparer) : base(collection, comparer) {
         }
 
-        protected UnitySerializedDictionary(IEqualityComparer<TKey> comparer) : base(comparer) {
+        public UnitySerializedDictionary(IEqualityComparer<TKey> comparer) : base(comparer) {
         }
 
-        protected UnitySerializedDictionary(int capacity) : base(capacity) {
+        public UnitySerializedDictionary(int capacity) : base(capacity) {
         }
 
-        protected UnitySerializedDictionary(int capacity, IEqualityComparer<TKey> comparer) : base(capacity, comparer) {
+        public UnitySerializedDictionary(int capacity, IEqualityComparer<TKey> comparer) : base(capacity, comparer) {
         }
 
         protected virtual bool AreValuesValidated => false;
