@@ -38,7 +38,7 @@ namespace LostPolygon.Unity.Utility.Editor {
             preservedTypes.UnionWith(preserveAllTypes);
 
 #if LP_NEWTONSOFT_JSON_ENABLED
-            TypeCache.FieldInfoCollection jsonPropertyFields = TypeCache.GetFieldsWithAttribute<JsonPropertyAttribute>();
+            TypeCache.FieldInfoCollection jsonPropertyFields = TypeCache.GetFieldsWithAttribute<Newtonsoft.Json.JsonPropertyAttribute>();
             preservedTypes.UnionWith(jsonPropertyFields.Select(f => f.DeclaringType));
 #endif
 
