@@ -19,7 +19,8 @@ namespace LostPolygon.Unity.BuildMetadata.Editor {
         protected virtual IReadOnlyList<string> ReleaseGitBranchNames { get; } = new[] {
             "qa",
             "staging",
-            "release"
+            "release",
+            "main"
         };
 
         protected virtual IReadOnlyList<string> ReleaseGitBranchPrefixes { get; } = new[] {
@@ -65,7 +66,7 @@ namespace LostPolygon.Unity.BuildMetadata.Editor {
             BasicBuildMetaData basicBuildMetadata = CreateBasicBuildMetaData();
 
             if (!basicBuildMetadata.IsReleaseBuild) {
-                Debug.LogWarning($"[BuildMetaDataGenerator] Building from non-release branch '{basicBuildMetadata.GitBranchName}', version would be set to {basicBuildMetadata.Version}");
+                Debug.LogWarning($"[BuildMetaDataGenerator] Building from non-release branch '{basicBuildMetadata.GitBranchName}', version will be set to {basicBuildMetadata.Version}");
             } else {
                 Debug.Log($"[BuildMetaDataGenerator] Build version set to {basicBuildMetadata.Version}");
             }
