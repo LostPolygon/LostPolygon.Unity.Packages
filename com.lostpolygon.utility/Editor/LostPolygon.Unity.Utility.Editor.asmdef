@@ -34,11 +34,6 @@
             "name": "com.unity.2d.sprite",
             "expression": "1.0.0",
             "define": "LP_UNITY_2D_SPRITE_ENABLED"
-        },
-        {
-            "name": "com.unity.2d.sprite",
-            "expression": "1.0.0",
-            "define": "LP_UNITY_2D_SPRITE_ENABLED"
         }
     ],
     "noEngineReferences": false

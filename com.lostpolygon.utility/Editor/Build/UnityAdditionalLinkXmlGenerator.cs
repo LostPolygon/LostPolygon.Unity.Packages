@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
-using Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
@@ -39,7 +38,7 @@ namespace LostPolygon.Unity.Utility.Editor {
             preservedTypes.UnionWith(preserveAllTypes);
 
 #if LP_NEWTONSOFT_JSON_ENABLED
-            TypeCache.FieldInfoCollection jsonPropertyFields = TypeCache.GetFieldsWithAttribute<JsonPropertyAttribute>();
+            TypeCache.FieldInfoCollection jsonPropertyFields = TypeCache.GetFieldsWithAttribute<Newtonsoft.Json.JsonPropertyAttribute>();
             preservedTypes.UnionWith(jsonPropertyFields.Select(f => f.DeclaringType));
 #endif
 
