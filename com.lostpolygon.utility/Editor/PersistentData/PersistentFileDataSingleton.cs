@@ -98,7 +98,7 @@ namespace LostPolygon.Unity.Utility.Editor {
 #if LP_TRACE
             Debug.Log(
                 $"[PersistentFileDataSingleton<{typeof(TData).Name}>] " +
-                $"Save({_data})!"
+                $"Save({_data})"
             );
 #endif
             if (InstanceData == null) {

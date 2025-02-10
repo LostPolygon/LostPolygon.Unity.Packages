@@ -107,8 +107,6 @@ namespace LostPolygon.Unity.Utility.Editor {
         protected virtual void UpdateDecoratedEditorState() {
             EnsureDecoratedEditor();
             _decoratedEditor.SetReferenceTargetIndex(this.GetReferenceTargetIndex());
-
-            //_decoratedEditor.UpdateReferenceTargetIndex(DecoratedEditorType);
         }
 
         protected void CallDecoratedOnSceneGUI() {

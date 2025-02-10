@@ -41,10 +41,10 @@ namespace LostPolygon.Unity.Utility.Editor {
         }
 
         public override int GetHashCode() {
-            HashCode hashCode = new();
-            hashCode.Add(_guid, StringComparer.OrdinalIgnoreCase);
-            hashCode.Add(_localIdentifier);
-            return hashCode.ToHashCode();
+            unchecked {
+                return ((_guid != null ? StringComparer.OrdinalIgnoreCase.GetHashCode(_guid) : 0) * 397) ^ 
+                    _localIdentifier.GetHashCode();
+            }
         }
 
         public static bool operator ==(AssetReference left, AssetReference right) {

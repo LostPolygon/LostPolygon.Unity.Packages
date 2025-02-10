@@ -89,17 +89,17 @@ namespace LostPolygon.Unity.Utility.Editor {
         public override int GetHashCode() {
             return _assetReference.GetHashCode();
         }
+        
+        public int CompareTo(SpriteAssetLazyReference other) {
+            return _assetReference.CompareTo(other._assetReference);
+        }
 
         public static bool operator ==(SpriteAssetLazyReference left, SpriteAssetLazyReference right) {
-            return Equals(left, right);
+            return left.Equals(right);
         }
 
         public static bool operator !=(SpriteAssetLazyReference left, SpriteAssetLazyReference right) {
-            return !Equals(left, right);
-        }
-
-        public int CompareTo(SpriteAssetLazyReference other) {
-            return _assetReference.CompareTo(other._assetReference);
+            return !left.Equals(right);
         }
     }
 }

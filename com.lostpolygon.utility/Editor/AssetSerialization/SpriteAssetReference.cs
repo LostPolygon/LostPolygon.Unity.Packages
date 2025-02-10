@@ -77,10 +77,11 @@ namespace LostPolygon.Unity.Utility.Editor {
         }
 
         public override int GetHashCode() {
-            return HashCode.Combine(
-                _spriteId != null ? StringComparer.OrdinalIgnoreCase.GetHashCode(_spriteId) : 0,
-                _guid != null ? StringComparer.OrdinalIgnoreCase.GetHashCode(_guid) : 0
-            );
+            unchecked {
+                return 
+                    ((_guid != null ? StringComparer.OrdinalIgnoreCase.GetHashCode(_guid) : 0) * 397) ^ 
+                    (_spriteId != null ? StringComparer.OrdinalIgnoreCase.GetHashCode(_spriteId) : 0);
+            }
         }
 
         public static bool operator ==(SpriteAssetReference left, SpriteAssetReference right) {
