@@ -34,22 +34,21 @@ namespace LostPolygon.Unity.Utility.Editor {
             // Copy data from UnityEditor.BuildPlayerWindow.BuildPlatform to our internal version
             ValidBuildPlatforms = new BuildPlatform[ValidBuildPlatformsRaw.Length];
             for (int i = 0; i < ValidBuildPlatformsRaw.Length; i++) {
-                ReflectionWrapper currentBuildPlatform =
-                    ReflectionWrapper.Wrap(ValidBuildPlatformsRaw.GetValue(i));
+                ReflectionWrapper buildPlatform = ReflectionWrapper.Wrap(ValidBuildPlatformsRaw.GetValue(i));
 
-                BuildTargetGroup buildTargetGroup = currentBuildPlatform.Property<BuildTargetGroup>("targetGroup");
-                string name = currentBuildPlatform.Property<GUIContent>("title").Get().text;
-                string tooltip = currentBuildPlatform.Field<string>("tooltip");
+                BuildTargetGroup buildTargetGroup = buildPlatform.Property<BuildTargetGroup>("targetGroup");
+                string name = buildPlatform.Property<GUIContent>("title").Get().text;
+                string tooltip = buildPlatform.Field<string>("tooltip");
                 int subtarget = 0;
-                bool hasSubtarget = currentBuildPlatform.UnwrapAsType().FullName == "UnityEditor.Build.BuildPlatformWithSubtarget";
+                bool hasSubtarget = buildPlatform.UnwrapAsType().FullName == "UnityEditor.Build.BuildPlatformWithSubtarget";
                 if (hasSubtarget) {
-                    subtarget = currentBuildPlatform.Field<int>("subtarget");
+                    subtarget = buildPlatform.Field<int>("subtarget");
                 }
 
-                NamedBuildTarget namedBuildTarget = currentBuildPlatform.Field<NamedBuildTarget>("namedBuildTarget");
+                NamedBuildTarget namedBuildTarget = buildPlatform.Field<NamedBuildTarget>("namedBuildTarget");
 
-                ReflectionWrapper.PropertyHandle<Texture> smallIconPropertyHandle = currentBuildPlatform.Property<Texture>("smallIcon");
-                ReflectionWrapper.FieldHandle<Texture> smallIconFieldHandle = currentBuildPlatform.Field<Texture>("smallIcon");
+                ReflectionWrapper.PropertyHandle<Texture> smallIconPropertyHandle = buildPlatform.Property<Texture>("smallIcon");
+                ReflectionWrapper.FieldHandle<Texture> smallIconFieldHandle = buildPlatform.Field<Texture>("smallIcon");
                 Texture smallIcon = smallIconPropertyHandle.Valid ? smallIconPropertyHandle.Get() : smallIconFieldHandle.Get();
 
                 ValidBuildPlatforms[i] =

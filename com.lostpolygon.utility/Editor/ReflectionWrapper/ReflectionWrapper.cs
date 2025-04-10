@@ -26,7 +26,8 @@ namespace LostPolygon.Unity.Utility.Editor {
             if (parameterTypes == null || methodInfos == null) {
                 matchingMethodInfo = methodInfos?[0];
             } else {
-                foreach (TypeMemberInfo.MethodInfoExtended methodInfo in methodInfos) {
+                for (int i = 0; i < methodInfos.Count; i++) {
+                    TypeMemberInfo.MethodInfoExtended methodInfo = methodInfos[i];
                     if (parameterTypes.SequenceEqual(methodInfo.ParameterTypes)) {
                         matchingMethodInfo = methodInfo;
                         break;
@@ -102,6 +103,7 @@ namespace LostPolygon.Unity.Utility.Editor {
         }
 
         private static void UnpackTypeAndInstance(ref object instance, out Type type) {
+            // ReSharper disable once JoinNullCheckWithUsage
             if (instance == null)
                 throw new ArgumentNullException(nameof(instance));
 

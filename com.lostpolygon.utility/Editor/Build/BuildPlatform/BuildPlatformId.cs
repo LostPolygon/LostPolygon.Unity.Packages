@@ -33,7 +33,9 @@ namespace LostPolygon.Unity.Utility.Editor {
         }
 
         public override int GetHashCode() {
-            return HashCode.Combine((int) BuildTargetGroup, Subtarget);
+            unchecked {
+                return ((int) _buildTargetGroup * 397) ^ _subtarget;
+            }
         }
 
         public static bool operator ==(BuildPlatformId left, BuildPlatformId right) {
@@ -41,7 +43,7 @@ namespace LostPolygon.Unity.Utility.Editor {
         }
 
         public int CompareTo(BuildPlatformId other) {
-            int buildTargetGroupComparison = _buildTargetGroup.CompareTo(other._buildTargetGroup);
+            int buildTargetGroupComparison = ((int) _buildTargetGroup).CompareTo((int) other._buildTargetGroup);
             if (buildTargetGroupComparison != 0) return buildTargetGroupComparison;
             return _subtarget.CompareTo(other._subtarget);
         }
