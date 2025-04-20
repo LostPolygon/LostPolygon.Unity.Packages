@@ -46,6 +46,21 @@ namespace LostPolygon.Unity.RestApiClient {
             OneOf<string, TError> response = await GetString(url, operationName);
             return HandleJsonResponse<T>(response, operationName);
         }
+        
+        public async UniTask<OneOf<string, TError>> PostGetString(
+            string url,
+            [CallerMemberName] string operationName = null
+        ) {
+            HttpRequest request = new HttpRequest(
+                _apiEndpoint + url,
+                UnityWebRequest.kHttpVerbPOST,
+                null,
+                null
+            );
+
+            OneOf<HttpResponse, IOErrorContext> response = await _httpClient.ExecuteRequest(request);
+            return HandleResponse(request, response, operationName);
+        }
 
         public async UniTask<OneOf<string, TError>> PostJson(
             string url,
