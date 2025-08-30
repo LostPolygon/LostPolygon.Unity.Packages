@@ -8,6 +8,7 @@ namespace LostPolygon.Unity.Utility {
         private Vector2Int? _lastScreenSize;
 
         public event Action<bool> ApplicationPauseStatusChanged;
+        public event Action<bool> ApplicationFocusStatusChanged;
 
         public event Action<Rect> ScreenSafeAreaChanged;
         public event Action<Vector2Int> ScreenSizeChanged;
@@ -18,6 +19,10 @@ namespace LostPolygon.Unity.Utility {
 
         private void OnApplicationPause(bool pauseStatus) {
             ApplicationPauseStatusChanged?.Invoke(pauseStatus);
+        }
+        
+        private void OnApplicationFocus(bool focus) {
+            ApplicationFocusStatusChanged?.Invoke(focus);
         }
 
         protected override void Awake() {
