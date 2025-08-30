@@ -71,10 +71,9 @@ namespace LostPolygon.Unity.Utility.Editor {
             IReadOnlyList<TContainer> dataContainers,
             Func<TContainer, TField> valueGetterFunc,
             Action<int, TContainer, TField> valueSetterAction,
-            Func<TField, TField> drawerFunc
-        ) {
-            return DrawField(dataContainers, valueGetterFunc, valueSetterAction, drawerFunc, out TField _);
-        }
+            Func<TField, TField> drawerFunc,
+            ExtraChangeCheckFunc<TField> extraChangeCheck = null
+        ) => DrawField(dataContainers, valueGetterFunc, valueSetterAction, drawerFunc, out TField _, extraChangeCheck);
 
         /// <summary>
         /// Draws a single field.
