@@ -20,7 +20,7 @@ namespace LostPolygon.Unity.Utility.Editor {
                     .Select(definition => (
                         definition,
                         CompilerDefinesManager
-                            .GetManagedDefinesForBuildTargetGroup(buildTargetGroup)
+                            .GetManagedDefines(buildTargetGroup)
                             .Contains(definition.Name)
                     ))
                     .ToList();
@@ -60,7 +60,7 @@ namespace LostPolygon.Unity.Utility.Editor {
                 }
 
                 if (GUILayout.Button("Apply", GUILayout.Width(120))) {
-                    CompilerDefinesManager.SetManagedDefinesForBuildTargetGroup(
+                    CompilerDefinesManager.SetManagedDefines(
                         EditorUserBuildSettings.selectedBuildTargetGroup,
                         _defines
                             .Where(d => d.enabled)

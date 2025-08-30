@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
+using UnityEditor.Build;
 
 namespace LostPolygon.Unity.Utility.Editor {
     public static class CompilerDefinesManager {
@@ -24,30 +25,37 @@ namespace LostPolygon.Unity.Utility.Editor {
 
             CompilerDefines = defines.ToArray();
         }
+        
+        public static List<string> GetManagedDefines(BuildTargetGroup buildTargetGroup) {
+            return GetManagedDefines(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup));
+        }
 
-        public static List<string> GetManagedDefinesForBuildTargetGroup(BuildTargetGroup buildTargetGroup) {
-            return GetDefinesForBuildTargetGroup(buildTargetGroup)
+        public static void SetManagedDefines(BuildTargetGroup buildTargetGroup, IReadOnlyList<string> defines) {
+            SetManagedDefines(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup), defines);
+        }
+
+        public static List<string> GetManagedDefines(NamedBuildTarget namedBuildTarget) {
+            return GetDefinesForBuildTargetGroup(namedBuildTarget)
                 .Where(define => CompilerDefines.Any(def => def.Name == define))
                 .ToList();
         }
 
-        public static void SetManagedDefinesForBuildTargetGroup(BuildTargetGroup buildTargetGroup, IReadOnlyList<string> defines) {
-            List<string> list = GetDefinesForBuildTargetGroup(buildTargetGroup)
+        public static void SetManagedDefines(NamedBuildTarget namedBuildTarget, IReadOnlyList<string> defines) {
+            List<string> list = GetDefinesForBuildTargetGroup(namedBuildTarget)
                 .Where(define => CompilerDefines.All(def => def.Name != define))
                 .Concat(defines)
                 .ToList();
 
-            SetDefinesForBuildTargetGroup(buildTargetGroup, list);
+            SetDefinesForBuildTargetGroup(namedBuildTarget, list);
         }
 
-        private static List<string> GetDefinesForBuildTargetGroup(BuildTargetGroup buildTargetGroup) {
-            return PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup)
-                .Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries)
-                .ToList();
+        private static string[] GetDefinesForBuildTargetGroup(NamedBuildTarget namedBuildTarget) {
+            PlayerSettings.GetScriptingDefineSymbols(namedBuildTarget, out string[] defines);
+                return defines;
         }
 
-        private static void SetDefinesForBuildTargetGroup(BuildTargetGroup buildTargetGroup, IReadOnlyList<string> defines) {
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, defines.ToArray());
+        private static void SetDefinesForBuildTargetGroup(NamedBuildTarget namedBuildTarget, IReadOnlyList<string> defines) {
+            PlayerSettings.SetScriptingDefineSymbols(namedBuildTarget, defines.ToArray());
         }
     }
 }

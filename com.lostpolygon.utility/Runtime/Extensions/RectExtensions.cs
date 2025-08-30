@@ -21,5 +21,14 @@ namespace LostPolygon.Unity.Utility {
                 Mathf.CeilToInt(rect.height)
             );
         }
+        
+        public static RectInt ToIntRectWithRound(this in Rect rect) {
+            return new RectInt(
+                Mathf.RoundToInt(rect.xMin),
+                Mathf.RoundToInt(rect.yMin),
+                Mathf.RoundToInt(rect.width),
+                Mathf.RoundToInt(rect.height)
+            );
+        }
     }
 }

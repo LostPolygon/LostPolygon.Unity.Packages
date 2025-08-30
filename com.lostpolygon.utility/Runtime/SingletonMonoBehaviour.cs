@@ -44,7 +44,7 @@ namespace LostPolygon.Unity.Utility {
                 return;
 
             // Trying to find an existing instance in the scene
-            _instance = (T) FindObjectOfType(typeof(T));
+            _instance = FindFirstObjectByType<T>();
 
             // Creating a new instance in case there are no instances present in the scene
             if (_instance != null)
@@ -58,8 +58,8 @@ namespace LostPolygon.Unity.Utility {
 
         protected virtual void Awake() {
             // Kill this instance, if other instances exist
-            if (FindObjectsOfType(typeof(T)).Length > 1) {
-                Debug.LogError("Multiple " + typeof(T).Name + " instances found, destroying...");
+            if (FindObjectsByType<T>(FindObjectsInactive.Exclude, FindObjectsSortMode.None).Length > 1) {
+                Debug.LogError($"Multiple {typeof(T).Name} instances found, destroying...");
                 _isDestroyed = true;
 
                 Component[] components = gameObject.GetComponents<Component>();
